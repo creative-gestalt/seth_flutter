@@ -43,6 +43,7 @@ class DBProvider {
         name: maps[index]['name'],
         directions: maps[index]['directions'],
         book: maps[index]['book'],
+        favorite: maps[index]['favorite'],
       );
     });
   }
@@ -57,6 +58,17 @@ class DBProvider {
     return maps.isNotEmpty ? Exercise.fromDb(maps.first) : Null;
   }
 
+  Future<void> updateExerciseFav(int id, int value) async {
+    final Database dbClient = await database;
+    await dbClient.rawUpdate("""
+      UPDATE exercises
+      SET favorite = ?
+      WHERE id = ?
+      """,
+      [value, id]
+    );
+  }
+
   // Practice Table
   Future<List<Practice>> getPractice() async {
     final Database dbClient = await database;
@@ -67,6 +79,7 @@ class DBProvider {
         name: maps[index]['name'],
         directions: maps[index]['directions'],
         book: maps[index]['book'],
+        favorite: maps[index]['favorite'],
       );
     });
   }
@@ -79,6 +92,17 @@ class DBProvider {
         whereArgs: [id],
     );
     return maps.isNotEmpty ? Practice.fromDb(maps.first) : Null;
+  }
+
+  Future<void> updatePracticeFav(int id, int value) async {
+    final Database dbClient = await database;
+    await dbClient.rawUpdate("""
+      UPDATE practice
+      SET favorite = ?
+      WHERE id = ?
+      """,
+      [value, id]
+    );
   }
 
   // Saved Table

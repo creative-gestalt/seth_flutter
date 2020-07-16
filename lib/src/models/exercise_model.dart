@@ -3,8 +3,9 @@ class Exercise {
   final String name;
   final String directions;
   final String book;
+  final int favorite;
 
-  Exercise({this.id, this.name, this.directions, this.book});
+  Exercise({this.id, this.name, this.directions, this.book, this.favorite});
 
   Map<String, dynamic> toMap() {
     return {
@@ -12,6 +13,7 @@ class Exercise {
       'name': name,
       'directions': directions,
       'book': book,
+      'favorite': favorite,
     };
   }
 
@@ -19,10 +21,11 @@ class Exercise {
       : id = map['id'],
         name = map['name'],
         directions = map['directions'],
-        book = map['book'];
+        book = map['book'],
+        favorite = map['favorite'];
 
   @override
   String toString() {
-    return 'Exercise{id: $id, name: $name, directions: $directions, book: $book}';
+    return 'Exercise{id: $id, name: $name, directions: $directions, book: $book, favorite: $favorite}';
   }
 }

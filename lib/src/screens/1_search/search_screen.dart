@@ -5,6 +5,10 @@ import 'package:seth_flutter/src/components/side_drawer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SearchScreen extends StatefulWidget {
+  final String uid;
+
+  SearchScreen({this.uid});
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
@@ -31,8 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Finding Seth', style: TextStyle(color: Colors.orange)),
-        iconTheme: IconThemeData(color: Colors.orange),
+        title: Text('Finding Seth'),
       ),
       body: WebView(
         initialUrl: 'https://findingseth.com/',
@@ -41,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
           _controller.complete(webViewController);
         },
       ),
-      drawer: SideDrawer(),
+      drawer: SideDrawer(uid: widget.uid),
     );
   }
 }

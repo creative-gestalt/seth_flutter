@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seth_flutter/src/components/directions/body.dart';
-import 'package:seth_flutter/src/components/side_drawer.dart';
 
 class DirectionsScreen extends StatefulWidget {
   final String name;
@@ -23,10 +22,7 @@ class _DirectionsScreenState extends State<DirectionsScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            'Directions',
-            style: new TextStyle(color: Colors.orange)),
-        iconTheme: IconThemeData(color: Colors.orange),
+        title: Text('Directions'),
       ),
       body: Body(name: name, directions: directions),
     );

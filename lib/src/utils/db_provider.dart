@@ -106,17 +106,17 @@ class DBProvider {
   }
 
   // Saved Table
-  Future<List<Quote>> getQuotes() async {
-    final Database dbClient = await database;
-    final List<Map<String, dynamic>> maps = await dbClient.query('saved');
-    return List.generate(maps.length, (index) {
-      return Quote(
-        id: maps[index]['id'],
-        quote: maps[index]['quote'],
-        book: maps[index]['book'],
-      );
-    });
-  }
+//  Future<List<Quote>> getQuotes() async {
+//    final Database dbClient = await database;
+//    final List<Map<String, dynamic>> maps = await dbClient.query('saved');
+//    return List.generate(maps.length, (index) {
+//      return Quote(
+//        id: maps[index]['id'],
+//        quote: maps[index]['quote'],
+//        book: maps[index]['book'],
+//      );
+//    });
+//  }
 
   Future<void> insertQuote(Quote quote) async {
     final Database dbClient = await database;

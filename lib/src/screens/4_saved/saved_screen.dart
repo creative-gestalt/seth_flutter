@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seth_flutter/src/bloc/quote_bloc.dart';
+import 'package:seth_flutter/src/screens/4_saved/new_saved_screen.dart';
 import 'package:seth_flutter/src/widgets/custom_sliver_app_bar.dart';
 import 'package:seth_flutter/src/widgets/side_drawer.dart';
 
@@ -20,6 +21,7 @@ class _SavedScreenState extends State<SavedScreen> {
   @override
   void initState() {
     super.initState();
+    triggerUid(context, uid);
   }
 
   @override
@@ -29,7 +31,6 @@ class _SavedScreenState extends State<SavedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    triggerUid(context, uid);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -57,42 +58,53 @@ class _SavedScreenState extends State<SavedScreen> {
               } else if (state is QuoteLoading) {
                 return buildLoading();
               } else if (state is QuoteLoaded) {
-                return buildListWithData(context, state.quotes);
+                if (state.quotes.quotes.length != 0)
+                  return buildListWithData(context, state.quotes);
+                return buildInitial();
               }
             }),
           ),
         ],
       ),
       drawer: SideDrawer(uid: uid),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NewSavedScreen(),
+            ),
+          );
+        },
+      ),
     );
   }
 
   Widget buildInitial() {
     return SliverToBoxAdapter(
-        child: new Theme(
-            data: Theme.of(context)
-                .copyWith(accentColor: Colors.orange),
-            child: LinearProgressIndicator()));
+      child: Center(
+        child: Text('Nothing Here. . .', style: TextStyle(color: Colors.orange.withAlpha(100))),
+      ),
+    );
   }
 
   Widget buildLoading() {
     return SliverToBoxAdapter(
         child: new Theme(
-            data: Theme.of(context)
-                .copyWith(accentColor: Colors.orange),
+            data: Theme.of(context).copyWith(accentColor: Colors.orange),
             child: LinearProgressIndicator()));
   }
 
   Widget buildListWithData(context, quote) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-            (context, index) {
+        (context, index) {
           return Card(
-            margin: EdgeInsets.symmetric(
-                vertical: 10.0, horizontal: 10.0),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             child: Container(
-              padding:
-              EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
               child: ListTile(
                 title: Text(quote.quotes[index]),
               ),

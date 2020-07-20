@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:seth_flutter/src/screens/email_login/email_login_screen.dart';
-import 'package:seth_flutter/src/screens/email_signup/email_signup_screen.dart';
+import 'package:seth_flutter/src/screens/login/email_login_screen.dart';
+import 'package:seth_flutter/src/screens/login/google_login_screen.dart';
+import 'file:///C:/Users/thebb/github/seth_flutter/lib/src/screens/signup/email_signup_screen.dart';
+import 'package:seth_flutter/src/utils/google_sign_in.dart';
 
 class SignUpScreen extends StatefulWidget {
   final String title = 'Sign Up';
@@ -14,13 +16,11 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -39,6 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Text(
                 'Keep Seth with you, on any device.',
                 style: TextStyle(
+                  color: Colors.orange,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                   fontFamily: 'Roboto',
@@ -59,6 +60,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
               ),
             ),
+            Divider(),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: SignInButton(
+                Buttons.Google,
+                text: "Log in with Google",
+                onPressed: () {
+                  try {
+                    signInWithGoogle().then((uid) {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => GoogleLoginScreen(uid: uid),
+                        ),
+                      );
+                    });
+                  } catch (error) {
+                    print(error);
+                  }
+                },
+              ),
+            ),
             Padding(
               padding: EdgeInsets.all(10.0),
               child: GestureDetector(
@@ -69,7 +91,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EmailLoginScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => EmailLoginScreen()),
                     );
                   }),
             ),

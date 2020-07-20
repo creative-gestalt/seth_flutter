@@ -62,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomSliverAppBar(
             height: 200.0,
             customTitle: 'You Create Your Own Reality - Seth',
+            fontSize: 15.0,
             bgColor: Colors.black,
             leading: true,
           ),

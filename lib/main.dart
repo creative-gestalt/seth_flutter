@@ -16,6 +16,7 @@ class SethApp extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => QuoteBloc(FirebaseQuoteRepository()),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Seth',
         theme: ThemeData.light(),
         darkTheme: appThemeDark(),

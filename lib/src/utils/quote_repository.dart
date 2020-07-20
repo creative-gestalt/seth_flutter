@@ -14,12 +14,19 @@ class FirebaseQuoteRepository implements QuoteRepository {
     allQuotes.clear();
     var quoteQuery = await dbRef.orderByKey().equalTo(uid).once().then((value) => value.value);
     Map<dynamic, dynamic> values = quoteQuery;
-    values.forEach((key, value) => allQuotes.add(values[uid]));
-    allQuotes = allQuotes.expand((element) => element).toList();
-    return Quote(
-      uid: uid,
-      quotes: allQuotes,
-    );
+    if (values != null) {
+      values.forEach((key, value) => allQuotes.add(values[uid]));
+      allQuotes = allQuotes.expand((element) => element).toList();
+      return Quote(
+        uid: uid,
+        quotes: allQuotes,
+      );
+    } else {
+      return Quote(
+        uid: uid,
+        quotes: [],
+      );
+    }
   }
 }
 

@@ -10,33 +10,47 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  Widget nextRoute;
+  String user;
+  Widget nextRouteDestination;
 
   @override
   void initState() {
     super.initState();
-    _getNextRoute();
+    _getCurrentUser();
   }
 
-  _getNextRoute() async {
-    final result = await FirebaseAuth.instance.currentUser().then((res) => res);
-    if (result != null) {
-      nextRoute = HomeScreen(uid: result.uid);
-    } else {
-      nextRoute = SignUpScreen();
-    }
+  void _getCurrentUser() async {
+    String fbUser = await FirebaseAuth.instance
+        .currentUser()
+        .then((res) => res != null ? res.uid : null);
+    print('after get user method $fbUser');
+    setState(() {
+      user = fbUser;
+    });
+    print('after setState $user');
+    _nextRoute();
+  }
+
+  void _nextRoute() {
+    setState(() {
+      if (user != null) {
+        nextRouteDestination = HomeScreen(uid: user);
+      } else {
+        nextRouteDestination = SignUpScreen();
+      }
+    });
+    print(nextRouteDestination);
   }
 
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      navigateAfterSeconds: nextRoute,
+      navigateAfterSeconds: nextRouteDestination,
       loaderColor: Colors.orange,
       backgroundColor: Colors.black,
       seconds: 2,
       title: Text(
-        '''Welcome to the Seth App
-        .:signing you in:.''',
+        '''.:creating your reality:.''',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20.0,

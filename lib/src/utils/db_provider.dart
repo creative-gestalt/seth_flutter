@@ -6,7 +6,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:seth_flutter/src/models/exercise_model.dart';
 import 'package:seth_flutter/src/models/practice_model.dart';
-import 'package:seth_flutter/src/models/quote_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
@@ -118,12 +117,12 @@ class DBProvider {
 //    });
 //  }
 
-  Future<void> insertQuote(Quote quote) async {
-    final Database dbClient = await database;
-    await dbClient.insert(
-      'saved',
-      quote.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//  Future<void> insertQuote(Quote quote) async {
+//    final Database dbClient = await database;
+//    await dbClient.insert(
+//      'saved',
+//      quote.toMap(),
+//      conflictAlgorithm: ConflictAlgorithm.replace,
+//    );
+//  }
 }

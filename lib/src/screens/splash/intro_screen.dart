@@ -10,32 +10,38 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
+  Widget nextRoute;
+
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.currentUser().then((res) {
-      print(res);
-      if (res != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen(uid: res.uid)),
-        );
-      } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SignUpScreen()),
-        );
-      }
-    });
+    _getNextRoute();
+  }
+
+  _getNextRoute() async {
+    final result = await FirebaseAuth.instance.currentUser().then((res) => res);
+    if (result != null) {
+      nextRoute = HomeScreen(uid: result.uid);
+    } else {
+      nextRoute = SignUpScreen();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 10,
+      navigateAfterSeconds: nextRoute,
+      loaderColor: Colors.orange,
+      backgroundColor: Colors.black,
+      seconds: 2,
       title: Text(
-        'Welcome to the Seth App',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+        '''Welcome to the Seth App
+        .:signing you in:.''',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20.0,
+          color: Colors.orange,
+        ),
       ),
     );
   }

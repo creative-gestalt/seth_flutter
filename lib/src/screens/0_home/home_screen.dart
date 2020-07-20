@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seth_flutter/src/components/side_drawer.dart';
+import 'file:///C:/Users/thebb/github/seth_flutter/lib/src/widgets/side_drawer.dart';
 import 'package:seth_flutter/src/widgets/custom_card.dart';
 import 'package:seth_flutter/src/widgets/custom_sliver_app_bar.dart';
 import 'package:seth_flutter/src/screens/1_search/search_screen.dart';

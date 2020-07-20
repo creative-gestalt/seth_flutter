@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:seth_flutter/src/components/side_drawer.dart';
+import 'file:///C:/Users/thebb/github/seth_flutter/lib/src/widgets/side_drawer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SearchScreen extends StatefulWidget {

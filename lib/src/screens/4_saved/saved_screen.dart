@@ -1,8 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:seth_flutter/src/blocs/quotes_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seth_flutter/src/bloc/quote_bloc.dart';
 import 'package:seth_flutter/src/widgets/custom_sliver_app_bar.dart';
-import 'package:seth_flutter/src/components/side_drawer.dart';
+import 'package:seth_flutter/src/widgets/side_drawer.dart';
 
 class SavedScreen extends StatefulWidget {
   final String uid;
@@ -15,24 +16,20 @@ class SavedScreen extends StatefulWidget {
 
 class _SavedScreenState extends State<SavedScreen> {
   get uid => widget.uid;
-  List quotes = List();
-  DatabaseReference dbRef;
 
   @override
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance.reference().child('saved_quotes');
-//    bloc.fetchAllQuotes(uid);
   }
 
   @override
   void dispose() {
-//    bloc.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    triggerUid(context, uid);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -42,45 +39,74 @@ class _SavedScreenState extends State<SavedScreen> {
             bgColor: Colors.black,
             leading: true,
           ),
-          StreamBuilder(
-            stream: dbRef.onValue,
-            builder: (context, AsyncSnapshot<Event> snapshot) {
-              if (!snapshot.hasData)
-                return SliverToBoxAdapter(
-                    child: new Theme(
-                        data: Theme.of(context)
-                            .copyWith(accentColor: Colors.orange),
-                        child: LinearProgressIndicator()));
-
-              print('this ran');
-              quotes.clear();
-              DataSnapshot dataValues = snapshot.data.snapshot;
-              Map<dynamic, dynamic> values = dataValues.value;
-              values.forEach((key, value) => quotes.add(values[uid]));
-              quotes = quotes.expand((element) => element).toList();
-              return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return Card(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10.0),
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 5),
-                        child: ListTile(
-                          title: Text(quotes[index]),
-                        ),
-                      ),
-                    );
-                  },
-                  childCount: quotes.length,
-                ),
-              );
+          BlocListener<QuoteBloc, QuoteState>(
+            listener: (context, state) {
+              if (state is QuoteError) {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                  ),
+                );
+              }
             },
+            child: BlocBuilder<QuoteBloc, QuoteState>(
+                // ignore: missing_return
+                builder: (context, state) {
+              if (state is QuoteInitial) {
+                return buildInitial();
+              } else if (state is QuoteLoading) {
+                return buildLoading();
+              } else if (state is QuoteLoaded) {
+                return buildListWithData(context, state.quotes);
+              }
+            }),
           ),
         ],
       ),
       drawer: SideDrawer(uid: uid),
     );
+  }
+
+  Widget buildInitial() {
+    return SliverToBoxAdapter(
+        child: new Theme(
+            data: Theme.of(context)
+                .copyWith(accentColor: Colors.orange),
+            child: LinearProgressIndicator()));
+  }
+
+  Widget buildLoading() {
+    return SliverToBoxAdapter(
+        child: new Theme(
+            data: Theme.of(context)
+                .copyWith(accentColor: Colors.orange),
+            child: LinearProgressIndicator()));
+  }
+
+  Widget buildListWithData(context, quote) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+            (context, index) {
+          return Card(
+            margin: EdgeInsets.symmetric(
+                vertical: 10.0, horizontal: 10.0),
+            child: Container(
+              padding:
+              EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+              child: ListTile(
+                title: Text(quote.quotes[index]),
+              ),
+            ),
+          );
+        },
+        childCount: quote.quotes.length,
+      ),
+    );
+  }
+
+  void triggerUid(BuildContext context, String uid) {
+    // ignore: close_sinks
+    final quoteBloc = BlocProvider.of<QuoteBloc>(context);
+    quoteBloc.add(GetQuotes(uid));
   }
 }

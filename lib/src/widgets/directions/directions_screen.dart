@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seth_flutter/src/components/directions/body.dart';
+import 'package:seth_flutter/src/widgets/directions/body.dart';
 
 class DirectionsScreen extends StatefulWidget {
   final String name;

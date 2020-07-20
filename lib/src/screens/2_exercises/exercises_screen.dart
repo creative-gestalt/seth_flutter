@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:seth_flutter/src/components/directions/directions_screen.dart';
-import 'package:seth_flutter/src/components/side_drawer.dart';
+import 'package:seth_flutter/src/widgets/directions/directions_screen.dart';
+import 'file:///C:/Users/thebb/github/seth_flutter/lib/src/widgets/side_drawer.dart';
 import 'package:seth_flutter/src/utils/db_provider.dart';
 
 class ExercisesScreen extends StatefulWidget {

@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seth_flutter/application/auth/auth_bloc.dart';
 import 'package:seth_flutter/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:seth_flutter/colors.dart';
+import 'package:seth_flutter/presentation/routes/router.gr.dart';
 
 class SignInForm extends StatelessWidget {
   @override
@@ -26,8 +29,11 @@ class SignInForm extends StatelessWidget {
                 ).show(context);
               }
             },
-            (r) => {
-              // TODO navigate
+            (_) {
+              ExtendedNavigator.of(context).pushQuotesOverviewPage();
+              context
+                  .bloc<AuthBloc>()
+                  .add(const AuthEvent.authCheckRequested());
             },
           ),
         );
@@ -54,7 +60,7 @@ class SignInForm extends StatelessWidget {
               const SizedBox(height: 30.0),
               TextFormField(
                 decoration: InputDecoration(
-                    prefix: Icon(Icons.email), labelText: 'Email'),
+                    prefixIcon: Icon(Icons.email), labelText: 'Email'),
                 autocorrect: false,
                 onChanged: (value) => context
                     .bloc<SignInFormBloc>()
@@ -75,7 +81,7 @@ class SignInForm extends StatelessWidget {
               const SizedBox(height: 15.0),
               TextFormField(
                 decoration: InputDecoration(
-                    prefix: Icon(Icons.lock), labelText: 'Password'),
+                    prefixIcon: Icon(Icons.lock), labelText: 'Password'),
                 autocorrect: false,
                 onChanged: (value) => context
                     .bloc<SignInFormBloc>()

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seth_flutter/domain/core/value_objects.dart';
 import 'package:seth_flutter/domain/quotes/quote.dart';
@@ -28,7 +27,7 @@ abstract class QuoteDto implements _$QuoteDto {
 
   Quote toDomain() {
     return Quote(
-      id: UniqueId.fromUniqueString(id as String),
+      id: UniqueId.fromUniqueString(id),
       body: QuoteBody(body)
     );
   }

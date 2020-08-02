@@ -46,7 +46,7 @@ class SignInForm extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             children: <Widget>[
               const SizedBox(height: 10.0),
-              Image.asset('lib/assets/seth_logo.png', height: 60),
+              Image.asset('lib/infrastructure/core/assets/seth_logo.png', height: 60),
               const SizedBox(height: 25.0),
               Text(
                 'You Create Your Reality',

@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:seth_flutter/domain/exercises/exercise_failure.dart';
+import 'package:seth_flutter/domain/exercises/i_exercise_dao.dart';
 import 'package:seth_flutter/infrastructure/core/moor_database.dart';
-import 'package:seth_flutter/infrastructure/exercises/exercises_dao.dart';
 
 part 'exercise_watcher_event.dart';
 part 'exercise_watcher_state.dart';
@@ -14,7 +14,7 @@ part 'exercise_watcher_bloc.freezed.dart';
 
 @injectable
 class ExerciseWatcherBloc extends Bloc<ExerciseWatcherEvent, ExerciseWatcherState> {
-  final ExerciseDao _exerciseDao;
+  final IExerciseDao _exerciseDao;
 
   StreamSubscription<List<Exercise>> _exerciseSubscription;
 

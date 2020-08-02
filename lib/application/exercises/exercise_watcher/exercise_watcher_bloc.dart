@@ -33,4 +33,10 @@ class ExerciseWatcherBloc extends Bloc<ExerciseWatcherEvent, ExerciseWatcherStat
       yield ExerciseWatcherState.loadSuccess(e.exercises);
     });
   }
+
+  @override
+  Future<void> close() async {
+    await _exerciseSubscription?.cancel();
+    return super.close();
+  }
 }

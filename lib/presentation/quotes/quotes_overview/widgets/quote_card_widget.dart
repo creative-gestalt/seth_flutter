@@ -35,8 +35,7 @@ class QuoteCard extends StatelessWidget {
     );
   }
 
-  void _showDeletionDialog(
-      BuildContext context, QuoteActorBloc quoteActorBloc) {
+  void _showDeletionDialog(BuildContext context, QuoteActorBloc quoteActorBloc) {
     showDialog(
       context: context,
       builder: (context) {

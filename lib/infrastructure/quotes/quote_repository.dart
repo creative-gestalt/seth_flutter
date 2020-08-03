@@ -30,14 +30,16 @@ class QuoteRepository implements IQuoteRepository {
                 .toImmutableList(),
           ),
         )
-        .onErrorReturnWith((e) {
-      if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
-        return left(const QuoteFailure.insufficientPermissions());
-      } else {
-        // log.error(e.toString))
-        return left(const QuoteFailure.unexpected());
-      }
-    });
+        .onErrorReturnWith(
+      (e) {
+        if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
+          return left(const QuoteFailure.insufficientPermissions());
+        } else {
+          // log.error(e.toString))
+          return left(const QuoteFailure.unexpected());
+        }
+      },
+    );
   }
 
   @override

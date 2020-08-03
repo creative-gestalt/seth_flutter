@@ -8,11 +8,28 @@ part 'exercises_dao.g.dart';
 
 @LazySingleton(as: IExerciseDao)
 @UseDao(tables: [Exercises])
-class ExerciseDao extends DatabaseAccessor<AppDatabase> with _$ExerciseDaoMixin implements IExerciseDao {
+class ExerciseDao extends DatabaseAccessor<AppDatabase>
+    with _$ExerciseDaoMixin
+    implements IExerciseDao {
   final AppDatabase db;
 
   ExerciseDao(this.db) : super(db);
 
   @override
   Stream<List<Exercise>> watchAllExercises() => select(exercises).watch();
+
+  @override
+  Stream<List<Exercise>> watchFavoriteExercises() {
+    return (select(exercises)
+          ..orderBy([
+            (t) =>
+                OrderingTerm(expression: t.favorite, mode: OrderingMode.desc),
+          ])
+          ..where((t) => t.favorite.equals(true)))
+        .watch();
+  }
+
+  @override
+  Future updateExercise(Exercise exercise) =>
+      update(exercises).replace(exercise);
 }

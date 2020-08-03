@@ -13,7 +13,8 @@ part 'exercise_watcher_state.dart';
 part 'exercise_watcher_bloc.freezed.dart';
 
 @injectable
-class ExerciseWatcherBloc extends Bloc<ExerciseWatcherEvent, ExerciseWatcherState> {
+class ExerciseWatcherBloc
+    extends Bloc<ExerciseWatcherEvent, ExerciseWatcherState> {
   final IExerciseDao _exerciseDao;
 
   StreamSubscription<List<Exercise>> _exerciseSubscription;
@@ -25,13 +26,23 @@ class ExerciseWatcherBloc extends Bloc<ExerciseWatcherEvent, ExerciseWatcherStat
   Stream<ExerciseWatcherState> mapEventToState(
     ExerciseWatcherEvent event,
   ) async* {
-    yield* event.map(watchAllStarted: (e) async* {
-      yield const ExerciseWatcherState.loadInProgress();
-      _exerciseSubscription = _exerciseDao.watchAllExercises().listen(
-          (event) => add(ExerciseWatcherEvent.exercisesReceived(event)));
-    }, exercisesReceived: (e) async* {
-      yield ExerciseWatcherState.loadSuccess(e.exercises);
-    });
+    yield* event.map(
+      watchAllStarted: (e) async* {
+        yield const ExerciseWatcherState.loadInProgress();
+        await _exerciseSubscription?.cancel();
+        _exerciseSubscription = _exerciseDao.watchAllExercises().listen(
+            (exerciseData) => add(ExerciseWatcherEvent.exercisesReceived(exerciseData)));
+      },
+      watchFavoriteStarted: (e) async* {
+        yield const ExerciseWatcherState.loadInProgress();
+        await _exerciseSubscription?.cancel();
+        _exerciseSubscription = _exerciseDao.watchFavoriteExercises().listen(
+            (exerciseData) => add(ExerciseWatcherEvent.exercisesReceived(exerciseData)));
+      },
+      exercisesReceived: (e) async* {
+        yield ExerciseWatcherState.loadSuccess(e.exercises);
+      },
+    );
   }
 
   @override

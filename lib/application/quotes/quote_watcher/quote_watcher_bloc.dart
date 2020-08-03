@@ -30,6 +30,7 @@ class QuoteWatcherBloc extends Bloc<QuoteWatcherEvent, QuoteWatcherState> {
   ) async* {
     yield* event.map(watchAllStarted: (e) async* {
       yield const QuoteWatcherState.loadInProgress();
+      await _quoteStreamSubscription?.cancel();
       _quoteStreamSubscription = _quoteRepository.watchAll().listen((failureOrQuotes) =>
           add(QuoteWatcherEvent.quotesReceived(failureOrQuotes)));
     }, quotesReceived: (e) async* {

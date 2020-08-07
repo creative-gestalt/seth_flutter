@@ -20,14 +20,16 @@ class QuoteCard extends StatelessWidget {
           _showDeletionDialog(context, quoteActorBloc);
         },
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 quote.body.getOrCrash(),
-                style: const TextStyle(fontSize: 18),
+                style: Theme.of(context).primaryTextTheme.bodyText2,
               ),
+              const SizedBox(height: 14,),
+              Text('- ${quote.book.getOrCrash()}', style: Theme.of(context).primaryTextTheme.headline5),
             ],
           ),
         ),

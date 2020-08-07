@@ -12,7 +12,7 @@ class HomeHubBody extends StatelessWidget {
       children: <Widget>[
         InkWell(
           onTap: () {
-            null;
+            ExtendedNavigator.of(context).pushSearchOverviewPage();
           },
           child: HubCard(
             text: 'Search',

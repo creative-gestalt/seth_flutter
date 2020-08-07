@@ -12,6 +12,7 @@ abstract class QuoteDto implements _$QuoteDto {
   const factory QuoteDto({
     @JsonKey(ignore: true) String id,
     @required String body,
+    @required String book,
     @required @ServerTimestampConverter() FieldValue serverTimeStamp,
   }) = _QuoteDto;
 
@@ -21,6 +22,7 @@ abstract class QuoteDto implements _$QuoteDto {
     return QuoteDto(
       id: quote.id.getOrCrash(),
       body: quote.body.getOrCrash(),
+      book: quote.book.getOrCrash(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
@@ -28,7 +30,8 @@ abstract class QuoteDto implements _$QuoteDto {
   Quote toDomain() {
     return Quote(
       id: UniqueId.fromUniqueString(id),
-      body: QuoteBody(body)
+      body: QuoteBody(body),
+      book: QuoteBook(book),
     );
   }
 

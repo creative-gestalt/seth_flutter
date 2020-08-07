@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:seth_flutter/application/exercises/exercise_actor/exercise_actor_bloc.dart';
@@ -13,9 +14,9 @@ class ExercisesOverviewPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ExerciseWatcherBloc>(
-          create: (context) => getIt<ExerciseWatcherBloc>()..add(
-            const ExerciseWatcherEvent.watchAllStarted()),
-          ),
+          create: (context) => getIt<ExerciseWatcherBloc>()
+            ..add(const ExerciseWatcherEvent.watchAllStarted()),
+        ),
         BlocProvider<ExerciseActorBloc>(
           create: (context) => getIt<ExerciseActorBloc>(),
         )
@@ -25,23 +26,31 @@ class ExercisesOverviewPage extends StatelessWidget {
           BlocListener<ExerciseActorBloc, ExerciseActorState>(
             listener: (context, state) {
               state.maybeMap(
-                updateFailure: (state) {
-                  FlushbarHelper.createError(
-                    duration: const Duration(seconds: 5),
-                    message: state.exerciseFailure.map(
-                      unexpected: (_) => 'Unexpected error occurred while updating, please contact support.',
-                      unableToUpdate: (_) => 'Unable to update. Lolz.'
-                    ),
-                  ).show(context);
-                },
-                addedSuccess: (state) {
-                  FlushbarHelper.createSuccess(message: 'Added to favorites').show(context);
-                },
-                removedSuccess: (state) {
-                  FlushbarHelper.createInformation(message: 'Removed from favorites').show(context);
-                },
-                orElse: () {}
-              );
+                  updateFailure: (state) {
+                    FlushbarHelper.createError(
+                      duration: const Duration(seconds: 5),
+                      message: state.exerciseFailure.map(
+                          unexpected: (_) =>
+                              'Unexpected error occurred while updating, please contact support.',
+                          unableToUpdate: (_) => 'Unable to update. Lolz.'),
+                    ).show(context);
+                  },
+                  addedSuccess: (state) {
+                    _flushBar(
+                        context,
+                        Colors.cyan[500],
+                        Icon(Icons.favorite, color: Colors.cyan[500]),
+                        'Added to favorites');
+                  },
+                  removedSuccess: (state) {
+                    _flushBar(
+                      context,
+                      Colors.red[900],
+                      Icon(Icons.remove_circle_outline, color: Colors.red[900]),
+                      'Removed from favorites',
+                    );
+                  },
+                  orElse: () {});
             },
           )
         ],
@@ -56,5 +65,19 @@ class ExercisesOverviewPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future _flushBar(BuildContext context, Color leftIndicatorColor, Icon icon,
+      String message) {
+    return Flushbar(
+            leftBarIndicatorColor: leftIndicatorColor,
+            borderRadius: 5.0,
+            duration: const Duration(milliseconds: 1500),
+            icon: icon,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            margin:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            message: message)
+        .show(context);
   }
 }

@@ -22,6 +22,7 @@ class HomeHubPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text('Hub'),
           actions: [
             IconButton(
@@ -33,7 +34,6 @@ class HomeHubPage extends StatelessWidget {
           ],
         ),
         body: HomeHubBody(),
-        drawer: null,
       ),
     );
   }

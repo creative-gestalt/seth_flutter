@@ -12,13 +12,15 @@ abstract class Quote implements _$Quote {
   const factory Quote({
     @required UniqueId id,
     @required QuoteBody body,
+    @required QuoteBook book,
   }) = _Quote;
-  
+
   const Quote._();
 
   factory Quote.empty() => Quote(
         id: UniqueId(),
         body: QuoteBody(''),
+        book: QuoteBook(''),
       );
 
   Option<ValueFailure<dynamic>> get failureOption {

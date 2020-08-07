@@ -4,8 +4,6 @@ import 'package:seth_flutter/domain/auth/auth_failure.dart';
 import 'package:seth_flutter/domain/auth/user.dart';
 import 'package:seth_flutter/domain/auth/value_objects.dart';
 
-import 'value_objects.dart';
-
 abstract class IAuthFacade {
   Future<Option<User>> getSignedInUser();
 

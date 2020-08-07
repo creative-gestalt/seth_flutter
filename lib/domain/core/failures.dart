@@ -20,4 +20,8 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.multiline({
     @required T failedValue,
   }) = Multiline<T>;
+  const factory ValueFailure.listTooLong({
+    @required T failedValue,
+    @required int max,
+  }) = ListTooLong<T>;
 }

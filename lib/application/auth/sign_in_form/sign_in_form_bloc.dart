@@ -11,7 +11,6 @@ import 'package:seth_flutter/domain/auth/value_objects.dart';
 
 part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';
-
 part 'sign_in_form_bloc.freezed.dart';
 
 @injectable

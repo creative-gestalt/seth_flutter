@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:seth_flutter/application/exercises/exercise_actor/exercise_actor_bloc.dart';
+import 'package:seth_flutter/presentation/routes/router.gr.dart';
 import 'package:seth_flutter/infrastructure/core/moor_database.dart';
 
 class ExerciseCard extends StatelessWidget {
@@ -14,7 +16,7 @@ class ExerciseCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: InkWell(
         onTap: () {
-          // TODO: navigate to direction
+          ExtendedNavigator.of(context).pushDirectionPage(direction: exercise.direction);
         },
         onLongPress: () {
           final exerciseActorBloc = context.bloc<ExerciseActorBloc>();
@@ -27,7 +29,7 @@ class ExerciseCard extends StatelessWidget {
         child: ListTile(
           title: Text(
             exercise.name,
-            style: TextStyle(color: Colors.white70),
+            style: Theme.of(context).primaryTextTheme.bodyText2,
           ),
           trailing: exercise.favorite
             ? Icon(Icons.brightness_1, size: 10, color: Colors.cyan[300])

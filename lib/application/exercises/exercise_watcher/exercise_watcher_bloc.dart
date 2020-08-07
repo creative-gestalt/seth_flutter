@@ -13,8 +13,7 @@ part 'exercise_watcher_state.dart';
 part 'exercise_watcher_bloc.freezed.dart';
 
 @injectable
-class ExerciseWatcherBloc
-    extends Bloc<ExerciseWatcherEvent, ExerciseWatcherState> {
+class ExerciseWatcherBloc extends Bloc<ExerciseWatcherEvent, ExerciseWatcherState> {
   final IExerciseDao _exerciseDao;
 
   StreamSubscription<List<Exercise>> _exerciseSubscription;

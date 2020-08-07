@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seth_flutter/application/auth/auth_bloc.dart';
 import 'package:seth_flutter/application/auth/sign_in_form/sign_in_form_bloc.dart';
-import 'package:seth_flutter/colors.dart';
 import 'package:seth_flutter/presentation/routes/router.gr.dart';
 
 class SignInForm extends StatelessWidget {
@@ -30,7 +29,7 @@ class SignInForm extends StatelessWidget {
               }
             },
             (_) {
-              ExtendedNavigator.of(context).pushQuotesOverviewPage();
+              ExtendedNavigator.of(context).pushHomeHubPage();
               context
                   .bloc<AuthBloc>()
                   .add(const AuthEvent.authCheckRequested());
@@ -52,7 +51,7 @@ class SignInForm extends StatelessWidget {
                 'You Create Your Reality',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: sethOrange500,
+                  color: Colors.orange[500],
                   fontSize: 26.0,
                   fontWeight: FontWeight.w200,
                 ),
@@ -110,7 +109,7 @@ class SignInForm extends StatelessWidget {
                         'Sign In',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
-                            color: sethTeal500),
+                            color: Colors.orange[500]),
                       ),
                     ),
                   ),
@@ -126,7 +125,7 @@ class SignInForm extends StatelessWidget {
                         'Register',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
-                            color: sethTeal500),
+                            color: Colors.orange[500]),
                       ),
                     ),
                   ),

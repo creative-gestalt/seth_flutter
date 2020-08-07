@@ -26,10 +26,11 @@ class HubCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(icon),
+            Icon(icon, color: Theme.of(context).primaryIconTheme.color),
             const SizedBox(height: 20),
             Text(
               text,
+              style: Theme.of(context).accentTextTheme.bodyText2,
               textAlign: TextAlign.center,
             ),
           ],

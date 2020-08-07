@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:seth_flutter/domain/exercises/exercise_failure.dart';
 import 'package:seth_flutter/domain/exercises/i_exercise_dao.dart';
-import 'package:seth_flutter/infrastructure/core/moor_database.dart';
+import 'package:seth_flutter/infrastructure/core/moor/moor_database.dart';
 
 part 'exercise_actor_event.dart';
 part 'exercise_actor_state.dart';

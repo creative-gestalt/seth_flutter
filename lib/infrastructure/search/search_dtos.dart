@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seth_flutter/domain/search/search.dart';
 import 'package:seth_flutter/domain/search/search_item.dart';
-import 'package:seth_flutter/domain/search/search_snapshot.dart';
+import 'package:seth_flutter/infrastructure/core/search/seth_search_snapshot.dart';
 import 'package:seth_flutter/domain/search/value_objects.dart';
 import 'package:kt_dart/kt.dart';
 
@@ -36,8 +36,8 @@ abstract class SearchDto implements _$SearchDto {
   factory SearchDto.fromJson(Map<String, dynamic> json) =>
       _$SearchDtoFromJson(json);
 
-  factory SearchDto.fromFindingSeth(Map<String, dynamic> doc) {
-    return SearchDto.fromJson(doc);
+  factory SearchDto.fromFindingSeth(SearchSnapshot doc) {
+    return SearchDto.fromJson(doc.data);
   }
 }
 

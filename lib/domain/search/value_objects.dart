@@ -52,7 +52,7 @@ class List3<T> extends ValueObject<KtList<T>> {
   @override
   final Either<ValueFailure<KtList<T>>, KtList<T>> value;
 
-  static const maxLength = 4;
+  static const maxLength = 6;
 
   factory List3(KtList<T> input) {
     assert(input != null);

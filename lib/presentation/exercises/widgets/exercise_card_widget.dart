@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:seth_flutter/application/exercises/exercise_actor/exercise_actor_bloc.dart';
 import 'package:seth_flutter/presentation/routes/router.gr.dart';
-import 'package:seth_flutter/infrastructure/core/moor_database.dart';
+import 'package:seth_flutter/infrastructure/core/moor/moor_database.dart';
 
 class ExerciseCard extends StatelessWidget {
   final Exercise exercise;

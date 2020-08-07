@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:seth_flutter/domain/exercises/i_exercises.dart';
 import 'package:seth_flutter/domain/exercises/i_exercise_dao.dart';
-import 'package:seth_flutter/infrastructure/core/moor_database.dart';
+import 'package:seth_flutter/infrastructure/core/moor/moor_database.dart';
 
 part 'exercises_dao.g.dart';
 

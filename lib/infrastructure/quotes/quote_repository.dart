@@ -7,7 +7,7 @@ import 'package:kt_dart/collection.dart';
 import 'package:seth_flutter/domain/quotes/i_quotes_repository.dart';
 import 'package:seth_flutter/domain/quotes/quote.dart';
 import 'package:seth_flutter/domain/quotes/quote_failure.dart';
-import 'package:seth_flutter/infrastructure/core/firestore_helpers.dart';
+import 'package:seth_flutter/infrastructure/core/firebase/firestore_helpers.dart';
 import 'package:seth_flutter/infrastructure/quotes/quote_dtos.dart';
 
 @LazySingleton(as: IQuoteRepository)

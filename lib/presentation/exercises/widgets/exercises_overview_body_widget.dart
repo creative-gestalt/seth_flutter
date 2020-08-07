@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:seth_flutter/application/exercises/exercise_watcher/exercise_watcher_bloc.dart';
-import 'package:seth_flutter/infrastructure/core/moor_database.dart';
+import 'package:seth_flutter/infrastructure/core/moor/moor_database.dart';
 import 'package:seth_flutter/presentation/exercises/widgets/exercise_card_widget.dart';
 import 'package:seth_flutter/presentation/quotes/quotes_overview/widgets/critical_failure_display_widget.dart';
 

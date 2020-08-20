@@ -26,9 +26,9 @@ class SearchWatcherBloc extends Bloc<SearchWatcherEvent, SearchWatcherState> {
     SearchWatcherEvent event,
   ) async* {
     yield* event.map(
-      getAllStarted: (e) async* {
+      searchStarted: (e) async* {
         yield const SearchWatcherState.loadInProgress();
-        _searchRepository.fetchResults(e.search).then((searchOrFailure) =>
+        _searchRepository.fetchResults(search: e.searchInput).then((searchOrFailure) =>
         add(SearchWatcherEvent.searchReceived(searchOrFailure)));
       },
       searchReceived: (e) async* {

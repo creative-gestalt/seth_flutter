@@ -1,19 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seth_flutter/application/quotes/quote_actor/quote_actor_bloc.dart';
+import 'package:seth_flutter/presentation/routes/router.gr.dart';
 import 'package:seth_flutter/domain/quotes/quote.dart';
 
 class QuoteCard extends StatelessWidget {
   final Quote quote;
 
-  const QuoteCard({Key key, @required this.quote}) : super(key: key);
+  const QuoteCard({
+    Key key,
+    @required this.quote,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
         onTap: () {
-          // TODO: implement navigation
+          ExtendedNavigator.of(context).pushQuoteFormPage(editedQuote: quote);
         },
         onLongPress: () {
           final quoteActorBloc = context.bloc<QuoteActorBloc>();
@@ -28,8 +33,11 @@ class QuoteCard extends StatelessWidget {
                 quote.body.getOrCrash(),
                 style: Theme.of(context).primaryTextTheme.bodyText2,
               ),
-              const SizedBox(height: 14,),
-              Text('- ${quote.book.getOrCrash()}', style: Theme.of(context).primaryTextTheme.headline5),
+              const SizedBox(
+                height: 14,
+              ),
+              Text('- ${quote.book.getOrCrash()}',
+                  style: Theme.of(context).primaryTextTheme.headline5),
             ],
           ),
         ),
@@ -37,7 +45,8 @@ class QuoteCard extends StatelessWidget {
     );
   }
 
-  void _showDeletionDialog(BuildContext context, QuoteActorBloc quoteActorBloc) {
+  void _showDeletionDialog(
+      BuildContext context, QuoteActorBloc quoteActorBloc) {
     showDialog(
       context: context,
       builder: (context) {

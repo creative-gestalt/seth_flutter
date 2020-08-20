@@ -15,25 +15,28 @@ class HubCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: ExactAssetImage(image),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(icon, color: Theme.of(context).primaryIconTheme.color),
-            const SizedBox(height: 20),
-            Text(
-              text,
-              style: Theme.of(context).accentTextTheme.bodyText2,
-              textAlign: TextAlign.center,
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Card(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: ExactAssetImage(image),
+              fit: BoxFit.cover,
             ),
-          ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(icon, color: Theme.of(context).primaryIconTheme.color),
+              const SizedBox(height: 20),
+              Text(
+                text,
+                style: Theme.of(context).accentTextTheme.bodyText2,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

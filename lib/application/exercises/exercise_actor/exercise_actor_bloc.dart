@@ -16,18 +16,23 @@ part 'exercise_actor_bloc.freezed.dart';
 class ExerciseActorBloc extends Bloc<ExerciseActorEvent, ExerciseActorState> {
   final IExerciseDao _exerciseDao;
 
-  ExerciseActorBloc(this._exerciseDao) : super(const ExerciseActorState.initial());
+  ExerciseActorBloc(this._exerciseDao)
+      : super(const ExerciseActorState.initial());
 
   @override
   Stream<ExerciseActorState> mapEventToState(
     ExerciseActorEvent event,
   ) async* {
-    yield const ExerciseActorState.actionInProgress();
-    final updateType = await _exerciseDao.updateExercise(event.exercise);
-    if (event.exercise.favorite) {
-      yield const ExerciseActorState.addedSuccess();
-    } else {
-      yield const ExerciseActorState.removedSuccess();
-    }
+    yield* event.map(
+      updated: (e) async* {
+        yield const ExerciseActorState.actionInProgress();
+        await _exerciseDao.updateExercise(event.exercise);
+        if (event.exercise.favorite) {
+          yield const ExerciseActorState.addedSuccess();
+        } else {
+          yield const ExerciseActorState.removedSuccess();
+        }
+      },
+    );
   }
 }

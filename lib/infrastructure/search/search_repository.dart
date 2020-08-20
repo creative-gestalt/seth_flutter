@@ -1,15 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
-import 'package:html/dom.dart';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:meta/meta.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:seth_flutter/domain/search/i_search_repository.dart';
 import 'package:seth_flutter/domain/search/search.dart';
 import 'package:seth_flutter/domain/search/search_failure.dart';
 import 'package:seth_flutter/domain/search/value_objects.dart';
-import 'package:seth_flutter/infrastructure/core/search/seth_query.dart';
 import 'package:seth_flutter/infrastructure/core/search/seth_search.dart';
 import 'package:seth_flutter/infrastructure/core/search/seth_search_snapshot.dart';
 
@@ -22,19 +19,21 @@ class SearchRepository implements ISearchRepository {
   SearchRepository(this._sethSearch);
 
   @override
-  Future<Either<SearchFailure, KtList<Search>>> fetchResults(SearchInput search) async {
+  Future<Either<SearchFailure, KtList<Search>>> fetchResults({
+    @required SearchInput search
+  }) async {
     try {
-      final userInput = search.getOrCrash();
+      final String userInput = search.getOrCrash();
       final List<SearchSnapshot> sethDocument = await
-          _sethSearch.resultCollection().searchSethCollection(userInput);
+          _sethSearch.resultCollection().searchSethEngine(userInput);
 
-      if (sethDocument != null) {
+      if (sethDocument.isNotEmpty) {
         final KtList<Search> results = sethDocument
             .map((doc) => SearchDto.fromFindingSeth(doc).toDomain())
             .toImmutableList();
         return right(results);
       } else {
-        return right(null);
+        return right(KtList.empty());
       }
     } on PlatformException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {

@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seth_flutter/application/quotes/quote_actor/quote_actor_bloc.dart';
 import 'package:seth_flutter/application/quotes/quote_watcher/quote_watcher_bloc.dart';
 import 'package:seth_flutter/presentation/quotes/quotes_overview/widgets/quotes_overview_body_widget.dart';
+import 'package:seth_flutter/presentation/routes/router.gr.dart';
 import 'package:seth_flutter/injection.dart';
 
 class QuotesOverviewPage extends StatelessWidget {
@@ -46,7 +48,7 @@ class QuotesOverviewPage extends StatelessWidget {
           body: QuotesOverviewBody(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // TODO: navigate to quote form page
+              ExtendedNavigator.of(context).pushQuoteFormPage(editedQuote: null);
             },
             child: Icon(Icons.add),
           ),

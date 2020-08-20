@@ -26,6 +26,7 @@ import 'application/quotes/quote_actor/quote_actor_bloc.dart';
 import 'application/quotes/quote_form/quote_form_bloc.dart';
 import 'infrastructure/quotes/quote_repository.dart';
 import 'application/quotes/quote_watcher/quote_watcher_bloc.dart';
+import 'application/search/search_actor/search_actor_bloc.dart';
 import 'application/search/search_form/search_form_bloc.dart';
 import 'infrastructure/core/search/search_injectable_module.dart';
 import 'infrastructure/search/search_repository.dart';
@@ -56,7 +57,7 @@ GetIt $initGetIt(
   gh.factory<QuoteActorBloc>(() => QuoteActorBloc(get<IQuoteRepository>()));
   gh.factory<QuoteFormBloc>(() => QuoteFormBloc(get<IQuoteRepository>()));
   gh.factory<QuoteWatcherBloc>(() => QuoteWatcherBloc(get<IQuoteRepository>()));
-  gh.factory<SearchFormBloc>(() => SearchFormBloc());
+  gh.factory<SearchActorBloc>(() => SearchActorBloc());
   gh.lazySingleton<SethSearch>(() => searchInjectableModule.sethSearch);
   gh.factory<SignInFormBloc>(() => SignInFormBloc(get<IAuthFacade>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<IAuthFacade>()));
@@ -65,6 +66,7 @@ GetIt $initGetIt(
       () => ExerciseWatcherBloc(get<IExerciseDao>()));
   gh.lazySingleton<ISearchRepository>(
       () => SearchRepository(get<SethSearch>()));
+  gh.factory<SearchFormBloc>(() => SearchFormBloc(get<ISearchRepository>()));
   gh.factory<SearchWatcherBloc>(
       () => SearchWatcherBloc(get<ISearchRepository>()));
   return get;

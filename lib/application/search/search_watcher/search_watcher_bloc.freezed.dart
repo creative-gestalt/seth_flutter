@@ -13,9 +13,9 @@ class _$SearchWatcherEventTearOff {
   const _$SearchWatcherEventTearOff();
 
 // ignore: unused_element
-  _GetAllStarted getAllStarted(SearchInput search) {
-    return _GetAllStarted(
-      search,
+  _SearchStarted searchStarted(SearchInput searchInput) {
+    return _SearchStarted(
+      searchInput,
     );
   }
 
@@ -34,26 +34,26 @@ const $SearchWatcherEvent = _$SearchWatcherEventTearOff();
 mixin _$SearchWatcherEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result getAllStarted(SearchInput search),
+    @required Result searchStarted(SearchInput searchInput),
     @required
         Result searchReceived(
             Either<SearchFailure, KtList<Search>> failureOrSearch),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result getAllStarted(SearchInput search),
+    Result searchStarted(SearchInput searchInput),
     Result searchReceived(
         Either<SearchFailure, KtList<Search>> failureOrSearch),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result getAllStarted(_GetAllStarted value),
+    @required Result searchStarted(_SearchStarted value),
     @required Result searchReceived(_SearchReceived value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result getAllStarted(_GetAllStarted value),
+    Result searchStarted(_SearchStarted value),
     Result searchReceived(_SearchReceived value),
     @required Result orElse(),
   });
@@ -74,84 +74,85 @@ class _$SearchWatcherEventCopyWithImpl<$Res>
   final $Res Function(SearchWatcherEvent) _then;
 }
 
-abstract class _$GetAllStartedCopyWith<$Res> {
-  factory _$GetAllStartedCopyWith(
-          _GetAllStarted value, $Res Function(_GetAllStarted) then) =
-      __$GetAllStartedCopyWithImpl<$Res>;
-  $Res call({SearchInput search});
+abstract class _$SearchStartedCopyWith<$Res> {
+  factory _$SearchStartedCopyWith(
+          _SearchStarted value, $Res Function(_SearchStarted) then) =
+      __$SearchStartedCopyWithImpl<$Res>;
+  $Res call({SearchInput searchInput});
 }
 
-class __$GetAllStartedCopyWithImpl<$Res>
+class __$SearchStartedCopyWithImpl<$Res>
     extends _$SearchWatcherEventCopyWithImpl<$Res>
-    implements _$GetAllStartedCopyWith<$Res> {
-  __$GetAllStartedCopyWithImpl(
-      _GetAllStarted _value, $Res Function(_GetAllStarted) _then)
-      : super(_value, (v) => _then(v as _GetAllStarted));
+    implements _$SearchStartedCopyWith<$Res> {
+  __$SearchStartedCopyWithImpl(
+      _SearchStarted _value, $Res Function(_SearchStarted) _then)
+      : super(_value, (v) => _then(v as _SearchStarted));
 
   @override
-  _GetAllStarted get _value => super._value as _GetAllStarted;
+  _SearchStarted get _value => super._value as _SearchStarted;
 
   @override
   $Res call({
-    Object search = freezed,
+    Object searchInput = freezed,
   }) {
-    return _then(_GetAllStarted(
-      search == freezed ? _value.search : search as SearchInput,
+    return _then(_SearchStarted(
+      searchInput == freezed ? _value.searchInput : searchInput as SearchInput,
     ));
   }
 }
 
-class _$_GetAllStarted implements _GetAllStarted {
-  const _$_GetAllStarted(this.search) : assert(search != null);
+class _$_SearchStarted implements _SearchStarted {
+  const _$_SearchStarted(this.searchInput) : assert(searchInput != null);
 
   @override
-  final SearchInput search;
+  final SearchInput searchInput;
 
   @override
   String toString() {
-    return 'SearchWatcherEvent.getAllStarted(search: $search)';
+    return 'SearchWatcherEvent.searchStarted(searchInput: $searchInput)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GetAllStarted &&
-            (identical(other.search, search) ||
-                const DeepCollectionEquality().equals(other.search, search)));
+        (other is _SearchStarted &&
+            (identical(other.searchInput, searchInput) ||
+                const DeepCollectionEquality()
+                    .equals(other.searchInput, searchInput)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(search);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(searchInput);
 
   @override
-  _$GetAllStartedCopyWith<_GetAllStarted> get copyWith =>
-      __$GetAllStartedCopyWithImpl<_GetAllStarted>(this, _$identity);
+  _$SearchStartedCopyWith<_SearchStarted> get copyWith =>
+      __$SearchStartedCopyWithImpl<_SearchStarted>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result getAllStarted(SearchInput search),
+    @required Result searchStarted(SearchInput searchInput),
     @required
         Result searchReceived(
             Either<SearchFailure, KtList<Search>> failureOrSearch),
   }) {
-    assert(getAllStarted != null);
+    assert(searchStarted != null);
     assert(searchReceived != null);
-    return getAllStarted(search);
+    return searchStarted(searchInput);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result getAllStarted(SearchInput search),
+    Result searchStarted(SearchInput searchInput),
     Result searchReceived(
         Either<SearchFailure, KtList<Search>> failureOrSearch),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (getAllStarted != null) {
-      return getAllStarted(search);
+    if (searchStarted != null) {
+      return searchStarted(searchInput);
     }
     return orElse();
   }
@@ -159,34 +160,34 @@ class _$_GetAllStarted implements _GetAllStarted {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result getAllStarted(_GetAllStarted value),
+    @required Result searchStarted(_SearchStarted value),
     @required Result searchReceived(_SearchReceived value),
   }) {
-    assert(getAllStarted != null);
+    assert(searchStarted != null);
     assert(searchReceived != null);
-    return getAllStarted(this);
+    return searchStarted(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result getAllStarted(_GetAllStarted value),
+    Result searchStarted(_SearchStarted value),
     Result searchReceived(_SearchReceived value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (getAllStarted != null) {
-      return getAllStarted(this);
+    if (searchStarted != null) {
+      return searchStarted(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetAllStarted implements SearchWatcherEvent {
-  const factory _GetAllStarted(SearchInput search) = _$_GetAllStarted;
+abstract class _SearchStarted implements SearchWatcherEvent {
+  const factory _SearchStarted(SearchInput searchInput) = _$_SearchStarted;
 
-  SearchInput get search;
-  _$GetAllStartedCopyWith<_GetAllStarted> get copyWith;
+  SearchInput get searchInput;
+  _$SearchStartedCopyWith<_SearchStarted> get copyWith;
 }
 
 abstract class _$SearchReceivedCopyWith<$Res> {
@@ -251,12 +252,12 @@ class _$_SearchReceived implements _SearchReceived {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result getAllStarted(SearchInput search),
+    @required Result searchStarted(SearchInput searchInput),
     @required
         Result searchReceived(
             Either<SearchFailure, KtList<Search>> failureOrSearch),
   }) {
-    assert(getAllStarted != null);
+    assert(searchStarted != null);
     assert(searchReceived != null);
     return searchReceived(failureOrSearch);
   }
@@ -264,7 +265,7 @@ class _$_SearchReceived implements _SearchReceived {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result getAllStarted(SearchInput search),
+    Result searchStarted(SearchInput searchInput),
     Result searchReceived(
         Either<SearchFailure, KtList<Search>> failureOrSearch),
     @required Result orElse(),
@@ -279,10 +280,10 @@ class _$_SearchReceived implements _SearchReceived {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result getAllStarted(_GetAllStarted value),
+    @required Result searchStarted(_SearchStarted value),
     @required Result searchReceived(_SearchReceived value),
   }) {
-    assert(getAllStarted != null);
+    assert(searchStarted != null);
     assert(searchReceived != null);
     return searchReceived(this);
   }
@@ -290,7 +291,7 @@ class _$_SearchReceived implements _SearchReceived {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result getAllStarted(_GetAllStarted value),
+    Result searchStarted(_SearchStarted value),
     Result searchReceived(_SearchReceived value),
     @required Result orElse(),
   }) {

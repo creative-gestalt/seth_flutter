@@ -15,6 +15,8 @@ abstract class QuoteFormState with _$QuoteFormState {
       showErrorMessages: false,
       isEditing: false,
       isSaving: false,
+      // Test failure by entering a QuoteFailure
+      // saveFailureOrSuccessOption: some(left(const QuoteFailure.unexpected())),
       saveFailureOrSuccessOption: none(),
     );
 }

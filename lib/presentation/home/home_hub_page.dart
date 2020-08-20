@@ -14,7 +14,7 @@ class HomeHubPage extends StatelessWidget {
           listener: (context, state) {
             state.maybeMap(
               unauthenticated: (_) =>
-                  ExtendedNavigator.of(context).pushSignInPage(),
+                  ExtendedNavigator.of(context).replace(Routes.signInPage),
               orElse: () {},
             );
           },

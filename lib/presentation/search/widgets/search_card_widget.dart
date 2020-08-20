@@ -59,7 +59,10 @@ class ItemDisplay extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Text(item.item.getOrCrash()),
+          child: Text(
+            item.item.getOrCrash(),
+            style: Theme.of(context).primaryTextTheme.bodyText2,
+          ),
         ),
       ),
     );

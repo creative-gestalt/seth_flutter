@@ -16,7 +16,8 @@ class ExerciseCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: InkWell(
         onTap: () {
-          ExtendedNavigator.of(context).pushDirectionPage(direction: exercise.direction);
+          ExtendedNavigator.of(context).pushDirectionPage(
+              name: exercise.name, direction: exercise.direction);
         },
         onLongPress: () {
           final exerciseActorBloc = context.bloc<ExerciseActorBloc>();
@@ -32,8 +33,9 @@ class ExerciseCard extends StatelessWidget {
             style: Theme.of(context).primaryTextTheme.bodyText2,
           ),
           trailing: exercise.favorite
-            ? Icon(Icons.brightness_1, size: 10, color: Colors.cyan[300])
-            : Icon(Icons.panorama_fish_eye, size: 10, color: Colors.cyan[300]),
+              ? Icon(Icons.brightness_1, size: 10, color: Colors.cyan[300])
+              : Icon(Icons.panorama_fish_eye,
+                  size: 10, color: Colors.cyan[300]),
         ),
       ),
     );

@@ -6,6 +6,8 @@ import 'package:seth_flutter/application/search/search_watcher/search_watcher_bl
 import 'package:seth_flutter/domain/search/value_objects.dart';
 
 class SearchBar extends StatelessWidget {
+  /// Bloc context is passed to these widgets
+  /// [SearchActorBloc], [SearchFormBloc], [SearchWatcherBloc]
   @override
   Widget build(BuildContext context) {
     return Row(
